@@ -72,7 +72,7 @@ export const Hero: React.FC = () => {
                                 fontSize: '90px',
                             }}
                         >  
-                            Sideline
+                            Side<span style={{ color: '#C9082A' }}>l</span>ine
                         </Text>
                     </Box>
 
