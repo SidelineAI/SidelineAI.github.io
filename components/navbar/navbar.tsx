@@ -32,7 +32,7 @@ export const Nav = () => {
                 <Switch
                      color="error"
                      checked={isDark}
-                     onChange={(e) => setTheme(e.target.checked ? 'light' : 'dark')}
+                     onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
                      
                 />
             </Navbar.Content>
