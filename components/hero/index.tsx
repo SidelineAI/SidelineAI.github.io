@@ -84,7 +84,7 @@ export const Hero: React.FC = () => {
                         size={'$lg'}
                         span
                     >
-                        All-in-one search platform for sports scouting and coaching.
+                        An all-in-one search platform for sports recruiting. 
                     </Text>
 
                     <Flex
