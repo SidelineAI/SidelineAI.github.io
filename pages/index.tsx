@@ -17,7 +17,6 @@ import {Footer} from '../components/footer';
 const Home: NextPage = () => {
    return (
       <Layout>
-         <Nav />
 
          <Box as="main">
          
