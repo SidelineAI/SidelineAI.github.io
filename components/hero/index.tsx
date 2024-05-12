@@ -27,7 +27,7 @@ export const Hero: React.FC = () => {
         setEmail(event.target.value);
     };
 
-    const handleJoinWaitlist = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleJoinWaitlist = async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
         
     
         const email = emailRef.current?.value; // Get the value directly from the input field
@@ -117,40 +117,39 @@ export const Hero: React.FC = () => {
             >
                 Watch Demo Video
             </Button>
-                <Flex css={{
-                    gap: '$8',
-                    pt: '$4',
-                
-                }}
-                wrap={'wrap'}
+            <Flex css={{
+                gap: '$8',
+                pt: '$4',
+            
+            }}
+            wrap={'wrap'}
+            >
+                <Input
+                    placeholder="Email Address"
+                    ref={emailRef}
+                    css={{ 
+                        width: '350px', 
+                        textAlign: 'center',
+                        marginBottom: '20px' // Add space below the input field
+                    }}
+                />
+                <Button
+                    type="submit"
+                    css={{
+                        backgroundColor: '#C9082A', // Red background
+                        color: 'white', // White text color
+                        border: '2px solid #C9082A',
+                        height: '35px',
+                        '&:hover': {
+                            backgroundColor: '#d91e40',
+                            color: 'white'
+                        }
+                    }}
+                    onClick={handleJoinWaitlist}
                 >
-                    <Input
-                        placeholder="Email Address"
-                        ref={emailRef}
-                        css={{ 
-                            width: '350px', 
-                            textAlign: 'center',
-                            marginBottom: '20px' // Add space below the input field
-                        }}
-                    />
-                    <Button
-                
-                        type="submit"
-                        css={{
-                            backgroundColor: '#C9082A', // Red background
-                            color: 'white', // White text color
-                            border: '2px solid #C9082A',
-                            height: '35px',
-                            '&:hover': {
-                                backgroundColor: '#d91e40',
-                                color: 'white'
-                            }
-                        }}
-                        onClick={handleJoinWaitlist}
-                    >
-                        Join Waitlist
-                    </Button>
-                </Flex>
+                    Join Waitlist
+                </Button>
+            </Flex>
         
         </Flex>
     );
