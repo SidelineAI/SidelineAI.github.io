@@ -162,7 +162,8 @@ export const Hero: React.FC = () => {
                 alignContent: 'center',
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: '100%',
+                width: '100%', // Full width
+                height: '100vh', // Full viewport height
                 gap: '$2',
                 padding: '$6', // Added more padding for smaller screens
             }}
@@ -199,10 +200,10 @@ export const Hero: React.FC = () => {
                 css={{
                     backgroundColor: 'transparent',
                     color: '#C9082A',
-                    border: '2px solid #C9082A', // Maintain consistency with the desktop version
-                    height: '40px', // Slightly larger button for easier touch interaction
+                    border: '2px solid #C9082A',
+                    height: '40px',
                     '&:hover': {
-                        backgroundColor: 'white', // Invert colors on hover
+                        backgroundColor: 'white',
                         color: '#C9082A',
                         borderColor: '#C9082A'
                     },
