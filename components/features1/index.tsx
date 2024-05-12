@@ -6,21 +6,10 @@ export const Features1 = () => {
     useEffect(() => {
         // Attempt to play the video as soon as the component mounts
         if (videoRef.current) {
-            videoRef.current.play().catch(err => {
-                // Handle the case where the user hasn't interacted yet
-                console.log("Autoplay was prevented: ", err);
-            });
+            
         }
     }, []);
 
-    const handlePlayAndUnmute = () => {
-        if (videoRef.current) {
-            videoRef.current.muted = false; // Unmute the video
-            videoRef.current.play().catch(err => {
-                console.log("Play was prevented on unmute: ", err);
-            });
-        }
-    };
 
     return (
         <div style={{ width: '100%', overflow: 'hidden' }}>
