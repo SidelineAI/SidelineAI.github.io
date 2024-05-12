@@ -178,7 +178,7 @@ export const Hero: React.FC = () => {
                     textAlign: 'center',
                     lineHeight: '1.1', // Adjusted line height for mobile readability
                     margin: '0',
-                    marginBottom: '100px', // Adjusted margin
+                    marginBottom: '60px', // Adjusted margin
 
                 }}>
                     Side<span style={{ color: '#C9082A' }}>l</span>ine
