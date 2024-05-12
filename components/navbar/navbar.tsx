@@ -34,9 +34,7 @@ export const Nav = () => {
                 <div style={{ marginRight: '10px' }}>
                     <AcmeLogo />
                 </div>
-                <Text b color="inherit">
-                    Sideline
-                </Text>
+             
             </Navbar.Brand>
 
             <Navbar.Content>

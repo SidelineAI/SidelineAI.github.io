@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Divider, FormElement, Input, Text } from '@nextui-org/react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Button, FormElement, Input, Text } from '@nextui-org/react';
 import { Box } from '../styles/box';
 import { Flex } from '../styles/flex';
 import { db } from './firebase-config';
@@ -8,6 +8,8 @@ import { collection, addDoc } from 'firebase/firestore';
 export const Hero: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [isMobile, setIsMobile] = useState<boolean>(false);
+    const emailRef = useRef<HTMLInputElement>(null);
+
 
     useEffect(() => {
         const handleResize = () => {
@@ -26,15 +28,18 @@ export const Hero: React.FC = () => {
     };
 
     const handleJoinWaitlist = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault(); // Prevent default form submission behavior
-        if (email.match(/^\S+@\S+\.\S+$/)) {
+        
+    
+        const email = emailRef.current?.value; // Get the value directly from the input field
+    
+        if (email && email.match(/^\S+@\S+\.\S+$/)) {
             try {
                 const docRef = await addDoc(collection(db, "waitlist"), {
                     email: email
                 });
                 console.log("Document written with ID: ", docRef.id);
                 alert('Thanks for joining the waitlist!');
-                setEmail(''); // Clear input after submission
+                if (emailRef.current) emailRef.current.value = ''; // Clear input after submission
             } catch (error) {
                 console.error("Error adding document: ", error);
                 alert('Failed to join the waitlist. Please try again.');
@@ -44,108 +49,211 @@ export const Hero: React.FC = () => {
         }
     };
 
+    const scrollToBottom = () => {
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth'
+        });
+    };
+
     const DesktopLayout = () => (
         <Flex
             css={{
-                gap: '$3',
-                px: '$6',
-                flexDirection: 'row',
+                flexDirection: 'column',
                 alignContent: 'center',
                 justifyContent: 'center',
                 alignItems: 'center',
                 width: '100%',
-                marginTop: '50px', // Added top spacing
-                marginBottom: '50px' // Added bottom spacing
-            }}
-        >
-            <Box
-                css={{
-                    pt: '$13',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '$5'
-                }}
-            >
-                <Box css={{ maxWidth: '600px' }}>
-                    <Text h1 css={{ fontSize: '90px' }}>
-                        Side<span style={{ color: '#C9082A' }}>l</span>ine
-                    </Text>
-                </Box>
-                <Text
-                    css={{
-                        color: '$accents8',
-                        maxWidth: '400px',
-                    }}
-                    size={'$lg'}
-                    span
-                >
-                    An all-in-one search platform for sports recruiting.
-                </Text>
-                <form onSubmit={handleJoinWaitlist}>
-                    <Flex css={{
-                        flexDirection: 'row',
-                        gap: '$2'
-                    }}>
-                        <Input placeholder="Enter your email address" size="lg" value={email} onChange={handleInputChange} />
-                        <Button type="submit" css={{ backgroundColor: '#C9082A', color: 'white' }}>
-                            Join Waitlist
-                        </Button>
-                    </Flex>
-                </form>
-            </Box>
-            <Box css={{ '& img': { width: '775px', objectFit: 'contain' } }}>
-                <img src="sideline.png" alt="Sideline promotional image" />
-            </Box>
-        </Flex>
-    );
-
-    const MobileLayout = () => (
-        <Flex
-            css={{
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '$5',
+                height: '100vh',
+                gap: '$0',
                 px: '$6',
-                paddingBottom: '20px' // Added bottom padding to the mobile layout
+                position: 'relative',
             }}
         >
             <Box css={{
                 display: 'flex',
                 flexDirection: 'column',
-                textAlign: 'center',
-                marginBottom: '$10', // Increased spacing
-                paddingTop: '$10' // Added more spacing on the top
+                alignItems: 'center',
             }}>
-                <Text h1 css={{ fontSize: '48px' }}>
+                <Text h1 css={{
+                    fontSize: '200px',
+                    textAlign: 'center',
+                    lineHeight: '0.8',
+                    margin: '0',
+                    marginBottom: '40px',
+                    
+                    
+                }}>
                     Side<span style={{ color: '#C9082A' }}>l</span>ine
                 </Text>
-                <Text css={{ color: '$accents8' }} size={'$lg'}>
-                    An all-in-one search platform for sports recruiting.
+                <Text
+                    css={{
+                        color: '$accents8',
+                        textAlign: 'center',
+                        maxWidth: '600px',
+                        margin: '0',
+                        marginBottom: '20px' // Reduced margin for better layout
+                    }}
+                    size={'$lg'}
+                >
+                    An AI-powered central hub for sports recruiting, scouting, and coaching.
                 </Text>
             </Box>
-
-            <img src="sideline.png" alt="Sideline promotional image" style={{ width: '100%', maxWidth: '600px', height: 'auto', marginBottom: '$10' }}/>
-
-            <form onSubmit={handleJoinWaitlist}>
+            <Button
+                onClick={scrollToBottom}
+                css={{
+                    
+                    backgroundColor: 'transparent',
+                    color: '#C9082A',
+                    border: '2px solid #C9082A', // Red border
+                    height: '35px',
+                    '&:hover': {
+                        backgroundColor: 'white', // Invert colors on hover
+                        color: '#C9082A',
+                        borderColor: '#C9082A'
+                    },
+                    marginBottom: '70px' // Space between the button and the form
+                }}
+            >
+                Watch Demo Video
+            </Button>
                 <Flex css={{
-                    flexDirection: 'row',
-                    width: '100%',
-                    justifyContent: 'center',
-                    gap: '$2'
-                }}>
-                    <Input placeholder="Enter your email address" size="lg" value={email} onChange={handleInputChange} />
-                    <Button type="submit" css={{ backgroundColor: '#C9082A', color: 'white', display: 'none' }}>
+                    gap: '$8',
+                    pt: '$4',
+                
+                }}
+                wrap={'wrap'}
+                >
+                    <Input
+                        placeholder="Email Address"
+                        ref={emailRef}
+                        css={{ 
+                            width: '350px', 
+                            textAlign: 'center',
+                            marginBottom: '20px' // Add space below the input field
+                        }}
+                    />
+                    <Button
+                
+                        type="submit"
+                        css={{
+                            backgroundColor: '#C9082A', // Red background
+                            color: 'white', // White text color
+                            border: '2px solid #C9082A',
+                            height: '35px',
+                            '&:hover': {
+                                backgroundColor: '#d91e40',
+                                color: 'white'
+                            }
+                        }}
+                        onClick={handleJoinWaitlist}
+                    >
                         Join Waitlist
                     </Button>
                 </Flex>
-            </form>
+        
         </Flex>
     );
+    
 
+    const MobileLayout = () => (
+        <Flex
+            css={{
+                flexDirection: 'column',
+                alignContent: 'center',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+                gap: '$2',
+                padding: '$6', // Added more padding for smaller screens
+            }}
+        >
+            <Box css={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}>
+                <Text h1 css={{
+                    fontSize: '48px', // Smaller font size for mobile
+                    textAlign: 'center',
+                    lineHeight: '1.1', // Adjusted line height for mobile readability
+                    margin: '0',
+                    marginBottom: '20px', // Adjusted margin
+                }}>
+                    Side<span style={{ color: '#C9082A' }}>l</span>ine
+                </Text>
+                <Text
+                    css={{
+                        color: '$accents8',
+                        textAlign: 'center',
+                        maxWidth: '90%', // Use percentage for better responsiveness
+                        margin: '0',
+                        marginBottom: '15px' // Adjusted margin for better layout
+                    }}
+                    size={'$lg'}
+                >
+                    An AI-powered central hub for sports recruiting, scouting, and coaching.
+                </Text>
+            </Box>
+            <Button
+                onClick={scrollToBottom}
+                css={{
+                    backgroundColor: 'transparent',
+                    color: '#C9082A',
+                    border: '2px solid #C9082A', // Maintain consistency with the desktop version
+                    height: '40px', // Slightly larger button for easier touch interaction
+                    '&:hover': {
+                        backgroundColor: 'white', // Invert colors on hover
+                        color: '#C9082A',
+                        borderColor: '#C9082A'
+                    },
+                    width: '80%', // Wider button for easier access
+                    marginBottom: '20px' // Adjusted spacing
+                }}
+            >
+                Watch Demo Video
+            </Button>
+            <Flex
+                css={{
+                    flexDirection: 'column', // Stack elements vertically due to space constraints
+                    alignItems: 'center',
+                    gap: '$2',
+                    width: '100%' // Use full width for form elements
+                }}
+            >
+                <Input
+                    placeholder="Email Address"
+                    css={{ 
+                        width: '80%', // Use percentage for better responsiveness
+                        textAlign: 'center',
+                        marginBottom: '10px' // Adjusted space below the input field
+                    }}
+                />
+                <Button
+                    type="submit"
+                    css={{
+                        backgroundColor: '#C9082A', // Red background
+                        color: 'white', // White text color
+                        border: '2px solid #C9082A',
+                        height: '40px', // Slightly larger button for easier touch interaction
+                        '&:hover': {
+                            backgroundColor: '#d91e40', // Adjust hover color
+                            color: 'white'
+                        },
+                        width: '80%', // Wider button for easier access
+                    }}
+                    onClick={handleJoinWaitlist}
+                >
+                    Join Waitlist
+                </Button>
+            </Flex>
+        </Flex>
+    );
+    
     return (
         <>
             {isMobile ? <MobileLayout /> : <DesktopLayout />}
-            {/* <Divider css={{ position: 'absolute', inset: '0', left: '0', mt: '$10' }} /> */}
+            {/* Optionally include further content that the button would scroll to */}
         </>
     );
 };

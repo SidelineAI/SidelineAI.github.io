@@ -22,7 +22,8 @@ const Home: NextPage = () => {
          <Box as="main">
          
          <Hero />
-         <Footer />
+         <Features1/>
+
 
          </Box>
       </Layout>
