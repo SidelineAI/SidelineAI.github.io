@@ -18,10 +18,12 @@ const Home: NextPage = () => {
    return (
       <Layout>
          <Nav />
+
          <Box as="main">
-            <Hero />
-            
-            <Footer />
+         
+         <Hero />
+         <Footer />
+
          </Box>
       </Layout>
    );

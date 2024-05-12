@@ -13,27 +13,37 @@ export const Nav = () => {
             isBordered
             css={{
                 'overflow': 'hidden',
+                'padding': '0 10px',  // Add padding to prevent content from touching the edges on small screens
                 '& .nextui-navbar-container': {
                     background: '$background',
                     borderBottom: 'none',
+                    display: 'flex',
+                    justifyContent: 'space-between',  // Distribute space between brand and content
+                },
+                '@media (max-width: 640px)': {  // Responsive adjustments for very small screens
+                    '& .nextui-navbar-container': {
+                        flexDirection: 'row',  // Keep horizontal layout on small screens
+                    },
                 },
             }}
         >
-            <Navbar.Brand>
-               <div style={{ marginRight: '10px' }}>
-                  <AcmeLogo />
-               </div>
-                <Text b color="inherit" hideIn="xs">
+            <Navbar.Brand css={{
+                display: 'flex',  // Ensure flex layout for proper alignment
+                alignItems: 'center',  // Center logo and text vertically
+            }}>
+                <div style={{ marginRight: '10px' }}>
+                    <AcmeLogo />
+                </div>
+                <Text b color="inherit">
                     Sideline
                 </Text>
             </Navbar.Brand>
 
-            <Navbar.Content >
+            <Navbar.Content>
                 <Switch
-                     color="error"
-                     checked={isDark}
-                     onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
-                     
+                    color="error"
+                    checked={isDark}
+                    onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
                 />
             </Navbar.Content>
         </Navbar>
