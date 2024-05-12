@@ -174,11 +174,12 @@ export const Hero: React.FC = () => {
                 alignItems: 'center',
             }}>
                 <Text h1 css={{
-                    fontSize: '48px', // Smaller font size for mobile
+                    fontSize: '85px', // Smaller font size for mobile
                     textAlign: 'center',
                     lineHeight: '1.1', // Adjusted line height for mobile readability
                     margin: '0',
-                    marginBottom: '20px', // Adjusted margin
+                    marginBottom: '100px', // Adjusted margin
+
                 }}>
                     Side<span style={{ color: '#C9082A' }}>l</span>ine
                 </Text>
@@ -188,7 +189,8 @@ export const Hero: React.FC = () => {
                         textAlign: 'center',
                         maxWidth: '90%', // Use percentage for better responsiveness
                         margin: '0',
-                        marginBottom: '15px' // Adjusted margin for better layout
+                        marginBottom: '15px', // Adjusted margin for better layout
+                        
                     }}
                     size={'$lg'}
                 >
