@@ -225,6 +225,7 @@ export const Hero: React.FC = () => {
             >
                 <Input
                     placeholder="Email Address"
+                    ref={emailRef}
                     css={{ 
                         width: '80%', // Use percentage for better responsiveness
                         textAlign: 'center',
